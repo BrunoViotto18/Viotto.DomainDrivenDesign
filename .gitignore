@@ -1,0 +1,16 @@
+## .gitignore ##
+
+## IDE
+
+**/.vs/
+
+
+## DOTNET
+
+**/bin/
+**/obj/
+
+
+## ENVIRONMENT
+
+**/*.env
