@@ -6,9 +6,9 @@ namespace Viotto.DomainDrivenDesign.Repository;
 public interface ICreatableRepository<TModel, TId>
     where TModel : IEntity<TId>
 {
-    TModel Create(TModel model);
-    Task<TModel> CreateAsync(TModel model);
+    void Create(TModel model);
+    Task CreateAsync(TModel model);
 
-    IEnumerable<TModel> CreateRange(IEnumerable<TModel> models);
-    Task<IEnumerable<TModel>> CreateRangeAsync(IEnumerable<TModel> models);
+    void CreateRange(IEnumerable<TModel> models);
+    Task CreateRangeAsync(IEnumerable<TModel> models);
 }
