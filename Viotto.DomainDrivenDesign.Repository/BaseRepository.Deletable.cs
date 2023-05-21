@@ -8,42 +8,42 @@ public abstract partial class BaseRepository<TContext, TModel, TId>
     where TContext : DbContext
     where TModel : class, IEntity<TId>
 {
-    public void Delete(TModel model)
+    public virtual void Delete(TModel model)
     {
         throw new NotImplementedException();
     }
 
-    public async Task DeleteAsync(TModel model)
+    public virtual async Task DeleteAsync(TModel model)
     {
         throw new NotImplementedException();
     }
 
-    public void DeleteById(TId id)
+    public virtual void DeleteById(TId id)
     {
         throw new NotImplementedException();
     }
 
-    public async Task DeleteByIdAsync(TId id)
+    public virtual async Task DeleteByIdAsync(TId id)
     {
         throw new NotImplementedException();
     }
 
-    public void DeleteRange(IEnumerable<TModel> models)
+    public virtual void DeleteRange(IEnumerable<TModel> models)
     {
         throw new NotImplementedException();
     }
 
-    public async Task DeleteRangeAsync(IEnumerable<TModel> models)
+    public virtual async Task DeleteRangeAsync(IEnumerable<TModel> models)
     {
         throw new NotImplementedException();
     }
 
-    public void DeleteRangeById(IEnumerable<TId> ids)
+    public virtual void DeleteRangeById(IEnumerable<TId> ids)
     {
         throw new NotImplementedException();
     }
 
-    public async Task DeleteRangeByIdAsync(IEnumerable<TId> ids)
+    public virtual async Task DeleteRangeByIdAsync(IEnumerable<TId> ids)
     {
         throw new NotImplementedException();
     }

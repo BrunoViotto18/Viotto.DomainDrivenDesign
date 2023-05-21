@@ -10,12 +10,12 @@ public abstract partial class BaseRepository<TContext, TModel, TId>
 {
     //! GetAll
 
-    public IQueryable<TModel> GetAll()
+    public virtual IQueryable<TModel> GetAll()
     {
         return Table;
     }
 
-    public IQueryable<TModel> GetAllNoTracking()
+    public virtual IQueryable<TModel> GetAllNoTracking()
     {
         return GetAll()
             .AsNoTracking();
@@ -23,12 +23,12 @@ public abstract partial class BaseRepository<TContext, TModel, TId>
 
     //! GetById
 
-    public TModel GetById(TId id)
+    public virtual TModel GetById(TId id)
     {
         return GetByIdAsync(id).Result;
     }
 
-    public async Task<TModel> GetByIdAsync(TId id)
+    public virtual async Task<TModel> GetByIdAsync(TId id)
     {
         return await GetAll()
             .FirstAsync(x => x.Id.Equals(id));
@@ -36,12 +36,12 @@ public abstract partial class BaseRepository<TContext, TModel, TId>
 
     //! GetByIdNoTracking
 
-    public TModel GetByIdNoTracking(TId id)
+    public virtual TModel GetByIdNoTracking(TId id)
     {
         return GetByIdNoTrackingAsync(id).Result;
     }
 
-    public async Task<TModel> GetByIdNoTrackingAsync(TId id)
+    public virtual async Task<TModel> GetByIdNoTrackingAsync(TId id)
     {
         return await GetAllNoTracking()
             .FirstAsync(x => x.Id.Equals(id));
@@ -49,13 +49,13 @@ public abstract partial class BaseRepository<TContext, TModel, TId>
 
     //! GetByIds
 
-    public IQueryable<TModel> GetByIds(IEnumerable<TId> ids)
+    public virtual IQueryable<TModel> GetByIds(IEnumerable<TId> ids)
     {
         return GetAll()
             .Where(x => ids.Contains(x.Id));
     }
 
-    public IQueryable<TModel> GetByIdsNoTracking(IEnumerable<TId> ids)
+    public virtual IQueryable<TModel> GetByIdsNoTracking(IEnumerable<TId> ids)
     {
         return GetByIds(ids)
             .AsNoTracking();

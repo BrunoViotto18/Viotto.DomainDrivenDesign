@@ -8,22 +8,22 @@ public abstract partial class BaseRepository<TContext, TModel, TId>
     where TContext : DbContext
     where TModel : class, IEntity<TId>
 {
-    public void Create(TModel model)
+    public virtual void Create(TModel model)
     {
         throw new NotImplementedException();
     }
 
-    public async Task CreateAsync(TModel model)
+    public virtual async Task CreateAsync(TModel model)
     {
         throw new NotImplementedException();
     }
 
-    public void CreateRange(IEnumerable<TModel> models)
+    public virtual void CreateRange(IEnumerable<TModel> models)
     {
         throw new NotImplementedException();
     }
 
-    public async Task CreateRangeAsync(IEnumerable<TModel> models)
+    public virtual async Task CreateRangeAsync(IEnumerable<TModel> models)
     {
         throw new NotImplementedException();
     }

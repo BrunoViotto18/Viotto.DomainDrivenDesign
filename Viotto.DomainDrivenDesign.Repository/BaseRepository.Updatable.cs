@@ -8,22 +8,22 @@ public abstract partial class BaseRepository<TContext, TModel, TId>
     where TContext : DbContext
     where TModel : class, IEntity<TId>
 {
-    public void Update(TModel model)
+    public virtual void Update(TModel model)
     {
         throw new NotImplementedException();
     }
 
-    public async Task UpdateAsync(TModel model)
+    public virtual async Task UpdateAsync(TModel model)
     {
         throw new NotImplementedException();
     }
 
-    public void UpdateRange(IEnumerable<TModel> models)
+    public virtual void UpdateRange(IEnumerable<TModel> models)
     {
         throw new NotImplementedException();
     }
 
-    public async Task UpdateRangeAsync(IEnumerable<TModel> models)
+    public virtual async Task UpdateRangeAsync(IEnumerable<TModel> models)
     {
         throw new NotImplementedException();
     }
