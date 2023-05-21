@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-
+using System.Numerics;
 using Viotto.DomainDrivenDesign.Model;
 
 namespace Viotto.DomainDrivenDesign.Repository;
@@ -9,43 +9,40 @@ public abstract partial class BaseRepository<TContext, TModel, TId>
 	where TContext : DbContext
 	where TModel : class, IEntity<TId>
 {
+    //! GetAll
+
     public IQueryable<TModel> GetAll()
-    {
-        throw new NotImplementedException();
-    }
+        => Table;
 
     public IQueryable<TModel> GetAllNoTracking()
-    {
-        throw new NotImplementedException();
-    }
+        => GetAll()
+            .AsNoTracking();
+
+    //! GetById
 
     public TModel GetById(TId id)
-    {
-        throw new NotImplementedException();
-    }
+        => GetByIdAsync(id).Result;
 
     public async Task<TModel> GetByIdAsync(TId id)
-    {
-        throw new NotImplementedException();
-    }
+        => await GetAll()
+            .FirstAsync(x => x.Id.Equals(id));
+
+    //! GetByIdNoTracking
 
     public TModel GetByIdNoTracking(TId id)
-    {
-        throw new NotImplementedException();
-    }
+        => GetByIdNoTrackingAsync(id).Result;
 
     public async Task<TModel> GetByIdNoTrackingAsync(TId id)
-    {
-        throw new NotImplementedException();
-    }
+        => await GetAllNoTracking()
+            .FirstAsync(x => x.Id.Equals(id));
+
+    //! GetByIds
 
     public IQueryable<TModel> GetByIds(IEnumerable<TId> ids)
-    {
-        throw new NotImplementedException();
-    }
+        => GetAll()
+            .Where(x => ids.Contains(x.Id));
 
     public IQueryable<TModel> GetByIdsNoTracking(IEnumerable<TId> ids)
-    {
-        throw new NotImplementedException();
-    }
+        => GetByIds(ids)
+            .AsNoTracking();
 }
