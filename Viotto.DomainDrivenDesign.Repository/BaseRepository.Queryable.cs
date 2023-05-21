@@ -25,7 +25,7 @@ public abstract partial class BaseRepository<TContext, TModel, TId>
 
     public virtual TModel GetById(TId id)
     {
-        return GetByIdAsync(id).Result;
+        return GetByIdAsync(id).GetAwaiter().GetResult();
     }
 
     public virtual async Task<TModel> GetByIdAsync(TId id)
@@ -38,7 +38,7 @@ public abstract partial class BaseRepository<TContext, TModel, TId>
 
     public virtual TModel GetByIdNoTracking(TId id)
     {
-        return GetByIdNoTrackingAsync(id).Result;
+        return GetByIdNoTrackingAsync(id).GetAwaiter().GetResult();
     }
 
     public virtual async Task<TModel> GetByIdNoTrackingAsync(TId id)
