@@ -15,12 +15,18 @@ public abstract partial class BaseRepository<TContext, TModel, TId> : IRepositor
 
 
     public BaseRepository(TContext context)
-        => Context = context;
+    {
+        Context = context;
+    }
 
 
     public virtual IDbContextTransaction BeginTransaction()
-        => Context.Database.BeginTransaction();
+    {
+        return Context.Database.BeginTransaction();
+    }
 
     public virtual async Task<IDbContextTransaction> BeginTransactionAsync()
-        => await Context.Database.BeginTransactionAsync();
+    {
+        return await Context.Database.BeginTransactionAsync();
+    }
 }
