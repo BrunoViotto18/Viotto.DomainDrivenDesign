@@ -1,4 +1,4 @@
-using System.Data;
+using Microsoft.EntityFrameworkCore.Storage;
 
 using Viotto.DomainDrivenDesign.Model;
 
@@ -12,6 +12,6 @@ public interface IRepository<TModel, TId>
         IDeletableRepository<TModel, TId>
     where TModel : IEntity<TId>
 {
-    IDbTransaction BeginTransaction();
-    Task<IDbTransaction> BeginTransactionAsync();
+    IDbContextTransaction BeginTransaction();
+    Task<IDbContextTransaction> BeginTransactionAsync();
 }

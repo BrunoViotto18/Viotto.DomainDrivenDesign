@@ -1,13 +1,35 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+	
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+	
+	<ItemGroup>
+	  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Viotto.DomainDrivenDesign.Model\Viotto.DomainDrivenDesign.Model.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Viotto.DomainDrivenDesign.Model\Viotto.DomainDrivenDesign.Model.csproj" />
+	</ItemGroup>
 
-  <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
-
+	<ItemGroup>
+		<Compile Update="BaseRepository.Queryable.cs">
+			<DependentUpon>BaseRepository.cs</DependentUpon>
+		</Compile>
+		
+		<Compile Update="BaseRepository.Creatable.cs">
+			<DependentUpon>BaseRepository.cs</DependentUpon>
+		</Compile>
+		
+		<Compile Update="BaseRepository.Updatable.cs">
+			<DependentUpon>BaseRepository.cs</DependentUpon>
+		</Compile>
+		
+		<Compile Update="BaseRepository.Deletable.cs">
+			<DependentUpon>BaseRepository.cs</DependentUpon>
+		</Compile>
+	</ItemGroup>
+	
 </Project>
