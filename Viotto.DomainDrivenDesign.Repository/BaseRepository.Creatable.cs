@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+
 using Viotto.DomainDrivenDesign.Model;
 
 namespace Viotto.DomainDrivenDesign.Repository;
@@ -8,23 +9,48 @@ public abstract partial class BaseRepository<TContext, TModel, TId>
     where TContext : DbContext
     where TModel : class, IEntity<TId>
 {
+    protected virtual bool BaseCreate(TModel model)
+    {
+        return true;
+    }
+
+    protected virtual bool BaseCreate(IEnumerable<TModel> models)
+    {
+        foreach (var model in models)
+        {
+            if (!BaseCreate(model))
+                return false;
+        }
+
+        return true;
+    }
+
+
     public virtual void Create(TModel model)
     {
-        throw new NotImplementedException();
+        CreateAsync(model).GetAwaiter().GetResult();
     }
 
     public virtual async Task CreateAsync(TModel model)
     {
-        throw new NotImplementedException();
+        if (!BaseCreate(model))
+            return;
+
+        await Context.AddAsync(model);
+        await Context.SaveChangesAsync();
     }
 
     public virtual void CreateRange(IEnumerable<TModel> models)
     {
-        throw new NotImplementedException();
+        CreateRangeAsync(models).GetAwaiter().GetResult();
     }
 
     public virtual async Task CreateRangeAsync(IEnumerable<TModel> models)
     {
-        throw new NotImplementedException();
+        if (!BaseCreate(models))
+            return;
+
+        await Context.AddRangeAsync(models);
+        await Context.SaveChangesAsync();
     }
 }
