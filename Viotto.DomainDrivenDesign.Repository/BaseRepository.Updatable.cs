@@ -25,6 +25,7 @@ public abstract partial class BaseRepository<TContext, TModel, TId>
         return true;
     }
 
+    //! Update
 
     public virtual void Update(TModel model)
     {
@@ -39,6 +40,8 @@ public abstract partial class BaseRepository<TContext, TModel, TId>
         Context.Update(model);
         await Context.SaveChangesAsync();
     }
+
+    //! UpdateRange
 
     public virtual void UpdateRange(IEnumerable<TModel> models)
     {

@@ -25,6 +25,7 @@ public abstract partial class BaseRepository<TContext, TModel, TId>
         return true;
     }
 
+    //! Create
 
     public virtual void Create(TModel model)
     {
@@ -39,6 +40,8 @@ public abstract partial class BaseRepository<TContext, TModel, TId>
         await Context.AddAsync(model);
         await Context.SaveChangesAsync();
     }
+
+    //! CreateRange
 
     public virtual void CreateRange(IEnumerable<TModel> models)
     {
