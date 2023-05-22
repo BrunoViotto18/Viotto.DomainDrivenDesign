@@ -80,7 +80,7 @@ public abstract partial class BaseRepository<TContext, TModel, TId>
 
     public virtual async Task DeleteRangeByIdAsync(IEnumerable<TId> ids)
     {
-        var models = GetByIdsNoTracking(ids);
+        var models = GetRangeByIdNoTracking(ids);
 
         await DeleteRangeAsync(models);
     }

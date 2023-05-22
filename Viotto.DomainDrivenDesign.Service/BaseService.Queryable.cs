@@ -26,9 +26,9 @@ public abstract partial class BaseService<TRepository, TModel, TId> : IService<T
     public async Task<TModel> GetByIdNoTrackingAsync(TId id)
         => await Repository.GetByIdNoTrackingAsync(id);
 
-    public IQueryable<TModel> GetByIds(IEnumerable<TId> ids)
-        => Repository.GetByIds(ids);
+    public IQueryable<TModel> GetRangeById(IEnumerable<TId> ids)
+        => Repository.GetRangeById(ids);
 
-    public IQueryable<TModel> GetByIdsNoTracking(IEnumerable<TId> ids)
-        => GetByIdsNoTracking(ids);
+    public IQueryable<TModel> GetRangeByIdNoTracking(IEnumerable<TId> ids)
+        => GetRangeByIdNoTracking(ids);
 }

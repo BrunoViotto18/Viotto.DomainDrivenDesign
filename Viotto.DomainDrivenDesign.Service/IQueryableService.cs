@@ -15,6 +15,6 @@ public interface IQueryableService<TModel, TId>
     TModel GetByIdNoTracking(TId id);
     Task<TModel> GetByIdNoTrackingAsync(TId id);
 
-    IQueryable<TModel> GetByIds(IEnumerable<TId> ids);
-    IQueryable<TModel> GetByIdsNoTracking(IEnumerable<TId> ids);
+    IQueryable<TModel> GetRangeById(IEnumerable<TId> ids);
+    IQueryable<TModel> GetRangeByIdNoTracking(IEnumerable<TId> ids);
 }

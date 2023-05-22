@@ -50,15 +50,15 @@ public abstract partial class BaseRepository<TContext, TModel, TId>
 
     //! GetByIds
 
-    public virtual IQueryable<TModel> GetByIds(IEnumerable<TId> ids)
+    public virtual IQueryable<TModel> GetRangeById(IEnumerable<TId> ids)
     {
         return GetAll()
             .Where(x => ids.Contains(x.Id));
     }
 
-    public virtual IQueryable<TModel> GetByIdsNoTracking(IEnumerable<TId> ids)
+    public virtual IQueryable<TModel> GetRangeByIdNoTracking(IEnumerable<TId> ids)
     {
-        return GetByIds(ids)
+        return GetRangeById(ids)
             .AsNoTracking();
     }
 }
