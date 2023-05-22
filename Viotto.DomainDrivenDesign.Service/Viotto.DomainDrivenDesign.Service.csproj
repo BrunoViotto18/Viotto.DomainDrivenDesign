@@ -1,17 +1,36 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />
-  </ItemGroup>
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+	
+	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Viotto.DomainDrivenDesign.Model\Viotto.DomainDrivenDesign.Model.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Viotto.DomainDrivenDesign.Model\Viotto.DomainDrivenDesign.Model.csproj" />
+		<ProjectReference Include="..\Viotto.DomainDrivenDesign.Repository\Viotto.DomainDrivenDesign.Repository.csproj" />
+	</ItemGroup>
 
-  <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<ItemGroup>
+		<Compile Update="BaseService.Queryable.cs">
+			<DependentUpon>BaseService.cs</DependentUpon>
+		</Compile>
+
+		<Compile Update="BaseService.Creatable.cs">
+			<DependentUpon>BaseService.cs</DependentUpon>
+		</Compile>
+
+		<Compile Update="BaseService.Updatable.cs">
+			<DependentUpon>BaseService.cs</DependentUpon>
+		</Compile>
+
+		<Compile Update="BaseService.Deletable.cs">
+			<DependentUpon>BaseService.cs</DependentUpon>
+		</Compile>
+	</ItemGroup>
 
 </Project>
