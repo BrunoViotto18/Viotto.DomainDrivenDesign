@@ -1,21 +1,27 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage;
+
 using Viotto.DomainDrivenDesign.Model;
 using Viotto.DomainDrivenDesign.Repository;
 
 namespace Viotto.DomainDrivenDesign.Service;
 
 
-public partial class BaseService<TRepository, TModel, TId> : IService<TModel, TId>
+public abstract partial class BaseService<TRepository, TModel, TId> : IService<TModel, TId>
     where TRepository : IRepository<TModel, TId>
     where TModel : IEntity<TId>
 {
-    public IDbContextTransaction BeginTransaction()
+    public TRepository Repository { get; init; }
+
+
+    public BaseService(TRepository repository)
     {
-        throw new NotImplementedException();
+        Repository = repository;
     }
 
-    public Task<IDbContextTransaction> BeginTransactionAsync()
-    {
-        throw new NotImplementedException();
-    }
+
+    public IDbContextTransaction BeginTransaction()
+        => Repository.BeginTransaction();
+
+    public async Task<IDbContextTransaction> BeginTransactionAsync()
+        => await Repository.BeginTransactionAsync();
 }

@@ -4,7 +4,7 @@ using Viotto.DomainDrivenDesign.Repository;
 namespace Viotto.DomainDrivenDesign.Service;
 
 
-public partial class BaseService<TRepository, TModel, TId> : IService<TModel, TId>
+public abstract partial class BaseService<TRepository, TModel, TId> : IService<TModel, TId>
     where TRepository : IRepository<TModel, TId>
     where TModel : IEntity<TId>
 {
@@ -13,7 +13,7 @@ public partial class BaseService<TRepository, TModel, TId> : IService<TModel, TI
         throw new NotImplementedException();
     }
 
-    public Task CreateAsync(TModel model)
+    public async Task CreateAsync(TModel model)
     {
         throw new NotImplementedException();
     }
@@ -23,7 +23,7 @@ public partial class BaseService<TRepository, TModel, TId> : IService<TModel, TI
         throw new NotImplementedException();
     }
 
-    public Task CreateRangeAsync(IEnumerable<TModel> models)
+    public async Task CreateRangeAsync(IEnumerable<TModel> models)
     {
         throw new NotImplementedException();
     }

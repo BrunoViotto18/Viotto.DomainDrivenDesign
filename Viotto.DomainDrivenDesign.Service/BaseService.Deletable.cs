@@ -4,7 +4,7 @@ using Viotto.DomainDrivenDesign.Repository;
 namespace Viotto.DomainDrivenDesign.Service;
 
 
-public partial class BaseService<TRepository, TModel, TId> : IService<TModel, TId>
+public abstract partial class BaseService<TRepository, TModel, TId> : IService<TModel, TId>
     where TRepository : IRepository<TModel, TId>
     where TModel : IEntity<TId>
 {
@@ -13,7 +13,7 @@ public partial class BaseService<TRepository, TModel, TId> : IService<TModel, TI
         throw new NotImplementedException();
     }
 
-    public Task DeleteAsync(TModel model)
+    public async Task DeleteAsync(TModel model)
     {
         throw new NotImplementedException();
     }
@@ -23,7 +23,7 @@ public partial class BaseService<TRepository, TModel, TId> : IService<TModel, TI
         throw new NotImplementedException();
     }
 
-    public Task DeleteByIdAsync(TId id)
+    public async Task DeleteByIdAsync(TId id)
     {
         throw new NotImplementedException();
     }
@@ -33,7 +33,7 @@ public partial class BaseService<TRepository, TModel, TId> : IService<TModel, TI
         throw new NotImplementedException();
     }
 
-    public Task DeleteRangeAsync(IEnumerable<TModel> models)
+    public async Task DeleteRangeAsync(IEnumerable<TModel> models)
     {
         throw new NotImplementedException();
     }
@@ -43,7 +43,7 @@ public partial class BaseService<TRepository, TModel, TId> : IService<TModel, TI
         throw new NotImplementedException();
     }
 
-    public Task DeleteRangeByIdAsync(IEnumerable<TId> ids)
+    public async Task DeleteRangeByIdAsync(IEnumerable<TId> ids)
     {
         throw new NotImplementedException();
     }
