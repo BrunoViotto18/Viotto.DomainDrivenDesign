@@ -8,43 +8,79 @@ public abstract partial class BaseRepository<TContext, TModel, TId>
     where TContext : DbContext
     where TModel : class, IEntity<TId>
 {
+    protected virtual Task<bool> BaseDelete(TModel model)
+    {
+        return Task.FromResult(true);
+    }
+
+    protected virtual async Task<bool> BaseDeleteRange(IEnumerable<TModel> models)
+    {
+        foreach (var model in models)
+        {
+            if (!await BaseDelete(model))
+                return false;
+        }
+
+        return true;
+    }
+
+    //! Delete
+
     public virtual void Delete(TModel model)
     {
-        throw new NotImplementedException();
+        DeleteAsync(model).GetAwaiter().GetResult();
     }
 
     public virtual async Task DeleteAsync(TModel model)
     {
-        throw new NotImplementedException();
+        if (!await BaseDelete(model))
+            return;
+
+        Context.Remove(model);
+        await Context.SaveChangesAsync();
     }
+
+    //! DeleteById
 
     public virtual void DeleteById(TId id)
     {
-        throw new NotImplementedException();
+        DeleteByIdAsync(id).GetAwaiter().GetResult();
     }
 
     public virtual async Task DeleteByIdAsync(TId id)
     {
-        throw new NotImplementedException();
+        var model = await GetByIdNoTrackingAsync(id);
+
+        await DeleteAsync(model);
     }
+
+    //! DeleteRange
 
     public virtual void DeleteRange(IEnumerable<TModel> models)
     {
-        throw new NotImplementedException();
+        DeleteRangeAsync(models).GetAwaiter().GetResult();
     }
 
     public virtual async Task DeleteRangeAsync(IEnumerable<TModel> models)
     {
-        throw new NotImplementedException();
+        if (!await BaseDeleteRange(models))
+            return;
+
+        Context.RemoveRange(models);
+        await Context.SaveChangesAsync();
     }
+
+    //! DeleteRangeById
 
     public virtual void DeleteRangeById(IEnumerable<TId> ids)
     {
-        throw new NotImplementedException();
+        DeleteRangeByIdAsync(ids).GetAwaiter().GetResult();
     }
 
     public virtual async Task DeleteRangeByIdAsync(IEnumerable<TId> ids)
     {
-        throw new NotImplementedException();
+        var models = GetByIdsNoTracking(ids);
+
+        await DeleteRangeAsync(models);
     }
 }
