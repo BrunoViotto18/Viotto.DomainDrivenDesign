@@ -9,42 +9,26 @@ public abstract partial class BaseService<TRepository, TModel, TId> : IService<T
     where TModel : IEntity<TId>
 {
     public IQueryable<TModel> GetAll()
-    {
-        throw new NotImplementedException();
-    }
+        => Repository.GetAll();
 
     public IQueryable<TModel> GetAllNoTracking()
-    {
-        throw new NotImplementedException();
-    }
+        => Repository.GetAllNoTracking();
 
     public TModel GetById(TId id)
-    {
-        throw new NotImplementedException();
-    }
+        => Repository.GetById(id);
 
     public async Task<TModel> GetByIdAsync(TId id)
-    {
-        throw new NotImplementedException();
-    }
+        => await Repository.GetByIdAsync(id);
 
     public TModel GetByIdNoTracking(TId id)
-    {
-        throw new NotImplementedException();
-    }
+        => Repository.GetByIdNoTracking(id);
 
     public async Task<TModel> GetByIdNoTrackingAsync(TId id)
-    {
-        throw new NotImplementedException();
-    }
+        => await Repository.GetByIdNoTrackingAsync(id);
 
     public IQueryable<TModel> GetByIds(IEnumerable<TId> ids)
-    {
-        throw new NotImplementedException();
-    }
+        => Repository.GetByIds(ids);
 
     public IQueryable<TModel> GetByIdsNoTracking(IEnumerable<TId> ids)
-    {
-        throw new NotImplementedException();
-    }
+        => GetByIdsNoTracking(ids);
 }
