@@ -9,22 +9,14 @@ public abstract partial class BaseService<TRepository, TModel, TId> : IService<T
     where TModel : IEntity<TId>
 {
     public void Create(TModel model)
-    {
-        throw new NotImplementedException();
-    }
+        => Repository.Create(model);
 
     public async Task CreateAsync(TModel model)
-    {
-        throw new NotImplementedException();
-    }
+        => await Repository.CreateAsync(model);
 
     public void CreateRange(IEnumerable<TModel> models)
-    {
-        throw new NotImplementedException();
-    }
+        => Repository.CreateRange(models);
 
     public async Task CreateRangeAsync(IEnumerable<TModel> models)
-    {
-        throw new NotImplementedException();
-    }
+        => await Repository.CreateRangeAsync(models);
 }
