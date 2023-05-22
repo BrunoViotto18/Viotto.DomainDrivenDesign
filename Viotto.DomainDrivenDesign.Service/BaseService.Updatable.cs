@@ -9,22 +9,14 @@ public abstract partial class BaseService<TRepository, TModel, TId> : IService<T
     where TModel : IEntity<TId>
 {
     public void Update(TModel model)
-    {
-        throw new NotImplementedException();
-    }
+        => Repository.Update(model);
 
     public async Task UpdateAsync(TModel model)
-    {
-        throw new NotImplementedException();
-    }
+        => await Repository.UpdateAsync(model);
 
     public void UpdateRange(IEnumerable<TModel> models)
-    {
-        throw new NotImplementedException();
-    }
+        => Repository.UpdateRange(models);
 
     public async Task UpdateRangeAsync(IEnumerable<TModel> models)
-    {
-        throw new NotImplementedException();
-    }
+        => await Repository.UpdateRangeAsync(models);
 }
