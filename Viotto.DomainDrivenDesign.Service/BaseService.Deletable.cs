@@ -9,42 +9,26 @@ public abstract partial class BaseService<TRepository, TModel, TId> : IService<T
     where TModel : IEntity<TId>
 {
     public void Delete(TModel model)
-    {
-        throw new NotImplementedException();
-    }
+        => Repository.Delete(model);
 
     public async Task DeleteAsync(TModel model)
-    {
-        throw new NotImplementedException();
-    }
+        => await Repository.DeleteAsync(model);
 
     public void DeleteById(TId id)
-    {
-        throw new NotImplementedException();
-    }
+        => Repository.DeleteById(id);
 
     public async Task DeleteByIdAsync(TId id)
-    {
-        throw new NotImplementedException();
-    }
+        => await Repository.DeleteByIdAsync(id);
 
     public void DeleteRange(IEnumerable<TModel> models)
-    {
-        throw new NotImplementedException();
-    }
+        => Repository.DeleteRange(models);
 
     public async Task DeleteRangeAsync(IEnumerable<TModel> models)
-    {
-        throw new NotImplementedException();
-    }
+        => await Repository.DeleteRangeAsync(models);
 
     public void DeleteRangeById(IEnumerable<TId> ids)
-    {
-        throw new NotImplementedException();
-    }
+        => Repository.DeleteRangeById(ids);
 
     public async Task DeleteRangeByIdAsync(IEnumerable<TId> ids)
-    {
-        throw new NotImplementedException();
-    }
+        => await Repository.DeleteRangeByIdAsync(ids);
 }
