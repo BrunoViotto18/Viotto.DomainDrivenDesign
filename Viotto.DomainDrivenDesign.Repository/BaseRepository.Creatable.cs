@@ -14,7 +14,7 @@ public abstract partial class BaseRepository<TContext, TModel, TId>
         return true;
     }
 
-    protected virtual bool BaseCreate(IEnumerable<TModel> models)
+    protected virtual bool BaseCreateRange(IEnumerable<TModel> models)
     {
         foreach (var model in models)
         {
@@ -47,7 +47,7 @@ public abstract partial class BaseRepository<TContext, TModel, TId>
 
     public virtual async Task CreateRangeAsync(IEnumerable<TModel> models)
     {
-        if (!BaseCreate(models))
+        if (!BaseCreateRange(models))
             return;
 
         await Context.AddRangeAsync(models);
