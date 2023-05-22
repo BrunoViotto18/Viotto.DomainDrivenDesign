@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+
 using Viotto.DomainDrivenDesign.Model;
 
 namespace Viotto.DomainDrivenDesign.Repository;

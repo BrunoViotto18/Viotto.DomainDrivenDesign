@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+
 using Viotto.DomainDrivenDesign.Model;
 
 namespace Viotto.DomainDrivenDesign.Repository;
@@ -8,16 +9,16 @@ public abstract partial class BaseRepository<TContext, TModel, TId>
     where TContext : DbContext
     where TModel : class, IEntity<TId>
 {
-    protected virtual bool BaseUpdate(TModel model)
+    protected virtual Task<bool> BaseUpdate(TModel model)
     {
-        return true;
+        return Task.FromResult(true);
     }
 
-    protected virtual bool BaseUpdateRange(IEnumerable<TModel> models)
+    protected virtual async Task<bool> BaseUpdateRange(IEnumerable<TModel> models)
     {
         foreach (var model in models)
         {
-            if (!BaseUpdate(model))
+            if (!await BaseUpdate(model))
                 return false;
         }
 
@@ -32,7 +33,7 @@ public abstract partial class BaseRepository<TContext, TModel, TId>
 
     public virtual async Task UpdateAsync(TModel model)
     {
-        if (!BaseUpdate(model))
+        if (!await BaseUpdate(model))
             return;
 
         Context.Update(model);
@@ -46,7 +47,7 @@ public abstract partial class BaseRepository<TContext, TModel, TId>
 
     public virtual async Task UpdateRangeAsync(IEnumerable<TModel> models)
     {
-        if (!BaseUpdateRange(models))
+        if (!await BaseUpdateRange(models))
             return;
 
         Context.UpdateRange(models);

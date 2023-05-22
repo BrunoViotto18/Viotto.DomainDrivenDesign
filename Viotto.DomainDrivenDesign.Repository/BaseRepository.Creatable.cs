@@ -9,16 +9,16 @@ public abstract partial class BaseRepository<TContext, TModel, TId>
     where TContext : DbContext
     where TModel : class, IEntity<TId>
 {
-    protected virtual bool BaseCreate(TModel model)
+    protected virtual Task<bool> BaseCreate(TModel model)
     {
-        return true;
+        return Task.FromResult(true);
     }
 
-    protected virtual bool BaseCreateRange(IEnumerable<TModel> models)
+    protected virtual async Task<bool> BaseCreateRange(IEnumerable<TModel> models)
     {
         foreach (var model in models)
         {
-            if (!BaseCreate(model))
+            if (!await BaseCreate(model))
                 return false;
         }
 
@@ -33,7 +33,7 @@ public abstract partial class BaseRepository<TContext, TModel, TId>
 
     public virtual async Task CreateAsync(TModel model)
     {
-        if (!BaseCreate(model))
+        if (!await BaseCreate(model))
             return;
 
         await Context.AddAsync(model);
@@ -47,7 +47,7 @@ public abstract partial class BaseRepository<TContext, TModel, TId>
 
     public virtual async Task CreateRangeAsync(IEnumerable<TModel> models)
     {
-        if (!BaseCreateRange(models))
+        if (!await BaseCreateRange(models))
             return;
 
         await Context.AddRangeAsync(models);
