@@ -25,6 +25,7 @@ public abstract partial class BaseRepository<TContext, TModel, TId>
         return true;
     }
 
+
     //! Update
 
     public virtual void Update(TModel model)

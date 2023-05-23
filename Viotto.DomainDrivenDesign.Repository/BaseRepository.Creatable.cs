@@ -25,6 +25,7 @@ public abstract partial class BaseRepository<TContext, TModel, TId>
         return true;
     }
 
+
     //! Create
 
     public virtual void Create(TModel model)
