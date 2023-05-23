@@ -3,5 +3,7 @@
 
 public interface IMiddleware
 {
-    public Task Invoke(IMiddlewareContext context);
+    Task Invoke(IMiddlewareContext context);
 }
+
+public delegate Task Middleware(IMiddlewareContext context);

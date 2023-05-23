@@ -3,5 +3,5 @@
 
 public interface IMiddlewareContext
 {
-    public Task Next();
+    Task Next();
 }
