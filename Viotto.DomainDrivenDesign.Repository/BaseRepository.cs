@@ -17,6 +17,14 @@ public abstract partial class BaseRepository<TContext, TModel, TId> : IRepositor
     public BaseRepository(TContext context)
     {
         Context = context;
+
+        var builder = new Builder<TModel>();
+        OnInit(builder);
+    }
+
+
+    protected virtual void OnInit(IBuilder<TModel> builder)
+    {
     }
 
 
