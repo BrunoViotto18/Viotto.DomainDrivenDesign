@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Viotto.DomainDrivenDesign.R
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Viotto.DomainDrivenDesign.Service", "Viotto.DomainDrivenDesign.Service\Viotto.DomainDrivenDesign.Service.csproj", "{EF6DF4FC-E169-4CD7-A7E3-3517C97BF092}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Viotto.DomainDrivenDesign.Repository.UnitTests", "Viotto.DomainDrivenDesign.Repository.UnitTests\Viotto.DomainDrivenDesign.Repository.UnitTests.csproj", "{C31BAD9E-5D11-4B11-983C-7640F9FE288A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{EF6DF4FC-E169-4CD7-A7E3-3517C97BF092}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF6DF4FC-E169-4CD7-A7E3-3517C97BF092}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF6DF4FC-E169-4CD7-A7E3-3517C97BF092}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C31BAD9E-5D11-4B11-983C-7640F9FE288A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C31BAD9E-5D11-4B11-983C-7640F9FE288A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C31BAD9E-5D11-4B11-983C-7640F9FE288A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C31BAD9E-5D11-4B11-983C-7640F9FE288A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
