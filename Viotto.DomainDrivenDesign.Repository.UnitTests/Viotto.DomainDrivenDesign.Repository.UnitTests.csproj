@@ -38,6 +38,9 @@
 		<Compile Update="BaseRepository.Queryable.Tests.cs">
 			<DependentUpon>BaseRepository.Tests.cs</DependentUpon>
 		</Compile>
+		<Compile Update="BaseRepository.Creatable.Tests.cs">
+			<DependentUpon>BaseRepository.Tests.cs</DependentUpon>
+		</Compile>
 	</ItemGroup>
 
 </Project>
