@@ -10,7 +10,7 @@ public abstract partial class BaseRepository<TContext, TModel, TId> : IRepositor
     where TContext : DbContext
     where TModel : class, IEntity<TId>
 {
-    protected abstract DbSet<TModel> Table { get; init; }
+    protected abstract DbSet<TModel> Table { get; }
     protected TContext Context { get; init; }
 
 

@@ -3,11 +3,10 @@
 namespace Viotto.DomainDrivenDesign.Repository.UnitTests.Models;
 
 
-internal class Class : IEntity<long>
+public class Test : IEntity<long>
 {
     public long Id { get; set; }
     public string Name { get; set; }
-
-    public IEnumerable<Student> Students { get; set; }
-    public IEnumerable<Teacher> Teachers { get; set; }
+    public DateOnly DateOfBirth { get; set; }
+    public int LuckyNumber { get; set; }
 }

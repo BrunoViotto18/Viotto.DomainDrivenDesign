@@ -7,9 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Viotto.DomainDrivenDesign.M
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Viotto.DomainDrivenDesign.Repository", "Viotto.DomainDrivenDesign.Repository\Viotto.DomainDrivenDesign.Repository.csproj", "{91ECC374-3DB1-4720-8FFE-D8BA4D68674F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Viotto.DomainDrivenDesign.Service", "Viotto.DomainDrivenDesign.Service\Viotto.DomainDrivenDesign.Service.csproj", "{EF6DF4FC-E169-4CD7-A7E3-3517C97BF092}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Viotto.DomainDrivenDesign.Service", "Viotto.DomainDrivenDesign.Service\Viotto.DomainDrivenDesign.Service.csproj", "{EF6DF4FC-E169-4CD7-A7E3-3517C97BF092}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Viotto.DomainDrivenDesign.Repository.UnitTests", "Viotto.DomainDrivenDesign.Repository.UnitTests\Viotto.DomainDrivenDesign.Repository.UnitTests.csproj", "{C31BAD9E-5D11-4B11-983C-7640F9FE288A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Viotto.DomainDrivenDesign.Repository.UnitTests", "Viotto.DomainDrivenDesign.Repository.UnitTests\Viotto.DomainDrivenDesign.Repository.UnitTests.csproj", "{DB48F119-BB38-4CAC-AFB5-D54531A59DEA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{622BD12F-2093-4712-AD3F-C4BFB07684ED}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{1DAA6312-B96D-4A3C-8A1F-7FA64DD98D05}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,13 +33,19 @@ Global
 		{EF6DF4FC-E169-4CD7-A7E3-3517C97BF092}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF6DF4FC-E169-4CD7-A7E3-3517C97BF092}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF6DF4FC-E169-4CD7-A7E3-3517C97BF092}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C31BAD9E-5D11-4B11-983C-7640F9FE288A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C31BAD9E-5D11-4B11-983C-7640F9FE288A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C31BAD9E-5D11-4B11-983C-7640F9FE288A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C31BAD9E-5D11-4B11-983C-7640F9FE288A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB48F119-BB38-4CAC-AFB5-D54531A59DEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB48F119-BB38-4CAC-AFB5-D54531A59DEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB48F119-BB38-4CAC-AFB5-D54531A59DEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB48F119-BB38-4CAC-AFB5-D54531A59DEA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{088998B9-A65E-4B89-9877-D52AA2A5CD8D} = {622BD12F-2093-4712-AD3F-C4BFB07684ED}
+		{91ECC374-3DB1-4720-8FFE-D8BA4D68674F} = {622BD12F-2093-4712-AD3F-C4BFB07684ED}
+		{EF6DF4FC-E169-4CD7-A7E3-3517C97BF092} = {622BD12F-2093-4712-AD3F-C4BFB07684ED}
+		{DB48F119-BB38-4CAC-AFB5-D54531A59DEA} = {1DAA6312-B96D-4A3C-8A1F-7FA64DD98D05}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {86AD8D59-AFF3-4D0D-9DB2-F2631B4699B2}
