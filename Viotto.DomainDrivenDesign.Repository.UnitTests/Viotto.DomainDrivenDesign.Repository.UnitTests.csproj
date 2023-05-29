@@ -41,6 +41,12 @@
 		<Compile Update="BaseRepository.Creatable.Tests.cs">
 			<DependentUpon>BaseRepository.Tests.cs</DependentUpon>
 		</Compile>
+		<Compile Update="BaseRepository.Updatable.Tests.cs">
+			<DependentUpon>BaseRepository.Tests.cs</DependentUpon>
+		</Compile>
+		<Compile Update="BaseRepository.Deletable.Tests.cs">
+			<DependentUpon>BaseRepository.Tests.cs</DependentUpon>
+		</Compile>
 	</ItemGroup>
 
 </Project>
