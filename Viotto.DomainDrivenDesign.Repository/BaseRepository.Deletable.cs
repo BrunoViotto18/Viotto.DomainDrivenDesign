@@ -38,6 +38,11 @@ public abstract partial class BaseRepository<TContext, TModel, TId>
         if (!await BaseDelete(model))
             return;
 
+        if (!GetAllNoTracking().Any(x => x.Id.Equals(model.Id)))
+        {
+            throw new InvalidOperationException();
+        }
+
         Context.Remove(model);
         await Context.SaveChangesAsync();
     }
@@ -68,6 +73,13 @@ public abstract partial class BaseRepository<TContext, TModel, TId>
         if (!await BaseDeleteRange(models))
             return;
 
+        var ids = models.Select(x => x.Id);
+
+        if (GetAllNoTracking().Where(x => ids.Contains(x.Id)).Count() != ids.Count())
+        {
+            throw new InvalidOperationException();
+        }
+
         Context.RemoveRange(models);
         await Context.SaveChangesAsync();
     }
@@ -82,6 +94,11 @@ public abstract partial class BaseRepository<TContext, TModel, TId>
     public virtual async Task DeleteRangeByIdAsync(IEnumerable<TId> ids)
     {
         var models = GetRangeByIdNoTracking(ids);
+
+        if (GetAllNoTracking().Where(x => ids.Contains(x.Id)).Count() != ids.Count())
+        {
+            throw new InvalidOperationException();
+        }
 
         await DeleteRangeAsync(models);
     }
