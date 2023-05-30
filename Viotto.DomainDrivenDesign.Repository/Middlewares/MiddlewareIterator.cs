@@ -5,15 +5,15 @@ namespace Viotto.DomainDrivenDesign.Repository.Middlewares;
 
 public class MiddlewareIterator<TInput, TOutput> : IMiddlewareIterator<TInput, TOutput>
 {
-    private readonly OneOf<IMiddleware<TInput, TOutput>, Middleware<TInput, TOutput>>[] _middlewares;
+    private readonly IMiddleware<TInput, TOutput>[] _middlewares;
     private readonly Func<TInput, Task<TOutput>> _function;
     private int CurrentIndex = -1;
 
-    private OneOf<IMiddleware<TInput, TOutput>, Middleware<TInput, TOutput>> Current => _middlewares[CurrentIndex];
+    private IMiddleware<TInput, TOutput> Current => _middlewares[CurrentIndex];
 
 
     public MiddlewareIterator(
-        IEnumerable<OneOf<IMiddleware<TInput, TOutput>, Middleware<TInput, TOutput>>> middlewares,
+        IEnumerable<IMiddleware<TInput, TOutput>> middlewares,
         Func<TInput, Task<TOutput>> function)
     {
         _middlewares = middlewares.ToArray();
@@ -28,10 +28,7 @@ public class MiddlewareIterator<TInput, TOutput> : IMiddlewareIterator<TInput, T
     {
         if (MoveNext())
         {
-            await Current.Match(
-                _interface => _interface.Invoke(this, context),
-                _delegate => _delegate(this, context)
-            );
+            await Current.Invoke(this, context);
         }
         else
         {

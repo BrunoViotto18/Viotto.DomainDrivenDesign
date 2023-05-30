@@ -17,7 +17,7 @@ public class RepositoryBuilder<TModel> : IRepositoryBuilder<TModel>
     }
 
 
-    public IRepositoryBuilder<TModel> AddMiddleware(OneOf<IMiddleware<TModel, Task>, Middleware<TModel, Task>> middleware)
+    public IRepositoryBuilder<TModel> AddMiddleware(IMiddleware<TModel, Task> middleware)
     {
 
         return this;

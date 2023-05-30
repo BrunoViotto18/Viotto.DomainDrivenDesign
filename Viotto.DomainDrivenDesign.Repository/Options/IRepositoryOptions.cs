@@ -7,8 +7,8 @@ using Middlewares;
 
 public interface IRepositoryOptions<TModel>
 {
-    IList<OneOf<IMiddleware<Null, OneOf<IQueryable<TModel>, TModel>>, Middleware<Null, OneOf<IQueryable<TModel>, TModel>>>> QueryMiddlewares { get; }
-    IList<OneOf<IMiddleware<TModel, Task>, Middleware<TModel, Task>>> CreateMiddlewares { get; }
-    IList<OneOf<IMiddleware<TModel, Task>, Middleware<TModel, Task>>> UpdateMiddlewares { get; }
-    IList<OneOf<IMiddleware<TModel, Task>, Middleware<TModel, Task>>> DeleteMiddlewares { get; }
+    IList<IMiddleware<Null, OneOf<IQueryable<TModel>, TModel>>> QueryMiddlewares { get; }
+    IList<IMiddleware<TModel, Task>> CreateMiddlewares { get; }
+    IList<IMiddleware<TModel, Task>> UpdateMiddlewares { get; }
+    IList<IMiddleware<TModel, Task>> DeleteMiddlewares { get; }
 }
