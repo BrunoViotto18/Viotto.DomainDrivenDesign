@@ -3,13 +3,10 @@
 
 public interface IMiddleware<TInput, TOutput>
 {
-    TOutput Invoke(IMiddlewareContext<TInput, TOutput> context);
+    Task Invoke(IMiddlewareIterator<TInput, TOutput> iterator, IMiddlewareContext<TInput, TOutput> context);
 }
 
-public interface IMiddleware<TOutput>
-{
-    TOutput Invoke(IMiddlewareContext<TOutput> context);
-}
-
-public delegate TOutput Middleware<TInput, TOutput>(IMiddlewareContext<TInput, TOutput> context);
-public delegate TOutput Middleware<TOutput>(IMiddlewareContext<TOutput> context);
+public delegate Task Middleware<TInput, TOutput>(
+    IMiddlewareIterator<TInput, TOutput> iterator,
+    IMiddlewareContext<TInput, TOutput> context
+);

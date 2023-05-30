@@ -12,10 +12,10 @@ public class SoftDeleteMiddleware<TInput> : IMiddleware<TInput, Task>
     }
 
 
-    public async Task Invoke(IMiddlewareContext<TInput, Task> context)
+    public async Task Invoke(IMiddlewareIterator<TInput, Task> iterator, IMiddlewareContext<TInput, Task> context)
     {
         SoftDelete(context.Input);
 
-        await context.Next();
+        await iterator.Next(context);
     }
 }

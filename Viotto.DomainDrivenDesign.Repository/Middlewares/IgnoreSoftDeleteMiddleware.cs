@@ -1,9 +1,10 @@
 ﻿using System.Linq.Expressions;
+using OneOf;
 
 namespace Viotto.DomainDrivenDesign.Repository.Middlewares;
 
 
-public class IgnoreSoftDeleteMiddleware<TModel> : IMiddleware<IQueryable<TModel>>
+public class IgnoreSoftDeleteMiddleware<TModel> : IMiddleware<Null, OneOf<IQueryable<TModel>, TModel>>
 {
     public Expression<Func<TModel, bool>> WhereSoftDeleted { get; init; }
 
@@ -14,10 +15,16 @@ public class IgnoreSoftDeleteMiddleware<TModel> : IMiddleware<IQueryable<TModel>
     }
 
 
-    public IQueryable<TModel> Invoke(IMiddlewareContext<IQueryable<TModel>> context)
+    public async Task Invoke(
+        IMiddlewareIterator<Null, OneOf<IQueryable<TModel>, TModel>> iterator,
+        IMiddlewareContext<Null, OneOf<IQueryable<TModel>, TModel>> context
+    )
     {
-        var result = context.Next();
+        await iterator.Next(context);
 
-        return result.Where(WhereSoftDeleted);
+        context.Output = context.Output.Match(
+            query => OneOf<IQueryable<TModel>, TModel>.FromT0(query.Where(WhereSoftDeleted)),
+            model => model
+        );
     }
 }
