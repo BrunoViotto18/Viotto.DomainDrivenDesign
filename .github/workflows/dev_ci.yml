@@ -1,14 +1,15 @@
-name: feature_ci
+name: dev_build_test
 
 on:
   push:
     branches:
+    - dev/*
     - feature/*
     - refactor/*
   workflow_dispatch:
 
 jobs:
-  build:
+  build_test:
     name: build_test_action
     runs-on: ubuntu-latest
     steps:
