@@ -1,0 +1,24 @@
+name: feature_ci
+
+on:
+  push:
+    branches:
+    - feature/*
+    - refactor/*
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: build_test_action
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: dotnet restore
+        run: dotnet restore
+      
+      - name: dotnet build
+        run: dotnet build --no-restore
+      
+      - name: dotnet test
+        run: dotnet test
