@@ -13,27 +13,27 @@ public abstract class BaseRepository<TModel, TId> : IRepository<TModel, TId>
 {
     protected DbContext Context { get; init; }
 
-
-    public BaseRepository(DbContext context) : this(context, new RepositoryBuilder<TModel>())
-    {
-    }
-
     public BaseRepository(DbContext context, IRepositoryBuilder<TModel> builder)
     {
         Context = context;
         OnInit(builder);
     }
 
+    public BaseRepository(DbContext context)
+        : this(context, new RepositoryBuilder<TModel>())
+    {
+    }
+
     protected virtual void OnInit(IRepositoryBuilder<TModel> builder)
     {
     }
 
-    public virtual IDbContextTransaction BeginTransaction()
+    public IDbContextTransaction BeginTransaction()
     {
         return Context.Database.BeginTransaction();
     }
 
-    public virtual Task<IDbContextTransaction> BeginTransactionAsync()
+    public Task<IDbContextTransaction> BeginTransactionAsync()
     {
         return Context.Database.BeginTransactionAsync();
     }
