@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
 using Viotto.DomainDrivenDesign.Model;
-using Viotto.DomainDrivenDesign.Repository.Options;
 
 namespace Viotto.DomainDrivenDesign.Repository;
 
@@ -13,19 +12,9 @@ public abstract class BaseRepository<TModel, TId> : IRepository<TModel, TId>
 {
     protected DbContext Context { get; init; }
 
-    public BaseRepository(DbContext context, IRepositoryBuilder<TModel> builder)
+    public BaseRepository(DbContext context)
     {
         Context = context;
-        OnInit(builder);
-    }
-
-    public BaseRepository(DbContext context)
-        : this(context, new RepositoryBuilder<TModel>())
-    {
-    }
-
-    protected virtual void OnInit(IRepositoryBuilder<TModel> builder)
-    {
     }
 
     public IDbContextTransaction BeginTransaction()
