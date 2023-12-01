@@ -9,14 +9,26 @@ public abstract partial class BaseService<TRepository, TModel, TId> : IService<T
     where TModel : IEntity<TId>
 {
     public void Update(TModel model)
-        => Repository.Update(model);
+    {
+        Repository.Update(model);
+        Repository.SaveChanges();
+    }
 
     public async Task UpdateAsync(TModel model)
-        => await Repository.UpdateAsync(model);
+    {
+        Repository.Update(model);
+        await Repository.SaveChangesAsync();
+    }
 
     public void UpdateRange(IEnumerable<TModel> models)
-        => Repository.UpdateRange(models);
+    {
+        Repository.BulkUpdate(models);
+        Repository.SaveChanges();
+    }
 
     public async Task UpdateRangeAsync(IEnumerable<TModel> models)
-        => await Repository.UpdateRangeAsync(models);
+    {
+        Repository.BulkUpdate(models);
+        await Repository.SaveChangesAsync();
+    }
 }

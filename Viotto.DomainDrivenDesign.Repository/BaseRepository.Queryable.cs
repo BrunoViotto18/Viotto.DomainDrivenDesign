@@ -5,60 +5,26 @@ using Viotto.DomainDrivenDesign.Model;
 namespace Viotto.DomainDrivenDesign.Repository;
 
 
-public abstract partial class BaseRepository<TContext, TModel, TId>
-	where TContext : DbContext
-	where TModel : class, IEntity<TId>
+public abstract partial class BaseRepository<TModel, TId> : IQueryableRepository<TModel, TId>
+    where TModel : class, IEntity<TId>, new()
 {
-    //! GetAll
-
-    public virtual IQueryable<TModel> GetAll()
+    public IQueryable<TModel> GetAll()
     {
-        return Table;
+        return Context.Set<TModel>();
     }
 
-    public virtual IQueryable<TModel> GetAllNoTracking()
+    public IQueryable<TModel> GetAllNoTracking()
     {
-        return GetAll()
-            .AsNoTracking();
+        return GetAll().AsNoTracking();
     }
 
-    //! GetById
-
-    public virtual TModel GetById(TId id)
+    public IQueryable<TModel> GetById(TId id)
     {
-        return GetByIdAsync(id).GetAwaiter().GetResult();
+        return GetAll().Where(x => x.Id.Equals(id));
     }
 
-    public virtual async Task<TModel> GetByIdAsync(TId id)
+    public IQueryable<TModel> GetByIdNoTracking(TId id)
     {
-        return await GetAll()
-            .FirstAsync(x => x.Id.Equals(id));
-    }
-
-    //! GetByIdNoTracking
-
-    public virtual TModel GetByIdNoTracking(TId id)
-    {
-        return GetByIdNoTrackingAsync(id).GetAwaiter().GetResult();
-    }
-
-    public virtual async Task<TModel> GetByIdNoTrackingAsync(TId id)
-    {
-        return await GetAllNoTracking()
-            .FirstAsync(x => x.Id.Equals(id));
-    }
-
-    //! GetByIds
-
-    public virtual IQueryable<TModel> GetRangeById(IEnumerable<TId> ids)
-    {
-        return GetAll()
-            .Where(x => ids.Contains(x.Id));
-    }
-
-    public virtual IQueryable<TModel> GetRangeByIdNoTracking(IEnumerable<TId> ids)
-    {
-        return GetRangeById(ids)
-            .AsNoTracking();
+        return GetAllNoTracking().Where(x => x.Id.Equals(id));
     }
 }

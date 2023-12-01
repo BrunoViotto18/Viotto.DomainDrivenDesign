@@ -1,7 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using DotNet.Testcontainers;
-
-using Respawn;
 
 namespace Viotto.DomainDrivenDesign.Repository.UnitTests.Contexts;
 
@@ -10,7 +7,6 @@ using Models;
 
 public class TestContext : DbContext
 {
-    public Respawner Respawner { get; init; }
     public DbSet<Test> Test { get; set; }
 
 

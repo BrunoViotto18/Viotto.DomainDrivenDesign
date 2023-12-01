@@ -14,4 +14,7 @@ public interface IRepository<TModel, TId>
 {
     IDbContextTransaction BeginTransaction();
     Task<IDbContextTransaction> BeginTransactionAsync();
+
+    void SaveChanges();
+    Task SaveChangesAsync();
 }

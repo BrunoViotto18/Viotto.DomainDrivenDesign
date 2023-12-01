@@ -9,12 +9,6 @@ public interface IQueryableRepository<TModel, TId>
     IQueryable<TModel> GetAll();
     IQueryable<TModel> GetAllNoTracking();
 
-    TModel GetById(TId id);
-    Task<TModel> GetByIdAsync(TId id);
-
-    TModel GetByIdNoTracking(TId id);
-    Task<TModel> GetByIdNoTrackingAsync(TId id);
-
-    IQueryable<TModel> GetRangeById(IEnumerable<TId> ids);
-    IQueryable<TModel> GetRangeByIdNoTracking(IEnumerable<TId> ids);
+    IQueryable<TModel> GetById(TId id);
+    IQueryable<TModel> GetByIdNoTracking(TId id);
 }

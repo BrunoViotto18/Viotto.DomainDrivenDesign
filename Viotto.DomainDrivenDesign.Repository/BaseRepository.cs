@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using EFCore.BulkExtensions;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
 using Viotto.DomainDrivenDesign.Model;
@@ -7,19 +8,17 @@ using Viotto.DomainDrivenDesign.Repository.Options;
 namespace Viotto.DomainDrivenDesign.Repository;
 
 
-public abstract partial class BaseRepository<TContext, TModel, TId> : IRepository<TModel, TId>
-    where TContext : DbContext
-    where TModel : class, IEntity<TId>
+public abstract partial class BaseRepository<TModel, TId> : IRepository<TModel, TId>
+    where TModel : class, IEntity<TId>, new()
 {
-    protected abstract DbSet<TModel> Table { get; }
-    protected TContext Context { get; init; }
+    protected DbContext Context { get; init; }
 
 
-    public BaseRepository(TContext context) : this(context, new RepositoryBuilder<TModel>())
+    public BaseRepository(DbContext context) : this(context, new RepositoryBuilder<TModel>())
     {
     }
 
-    public BaseRepository(TContext context, IRepositoryBuilder<TModel> builder)
+    public BaseRepository(DbContext context, IRepositoryBuilder<TModel> builder)
     {
         Context = context;
         OnInit(builder);
@@ -36,8 +35,18 @@ public abstract partial class BaseRepository<TContext, TModel, TId> : IRepositor
         return Context.Database.BeginTransaction();
     }
 
-    public virtual async Task<IDbContextTransaction> BeginTransactionAsync()
+    public virtual Task<IDbContextTransaction> BeginTransactionAsync()
     {
-        return await Context.Database.BeginTransactionAsync();
+        return Context.Database.BeginTransactionAsync();
+    }
+
+    public void SaveChanges()
+    {
+        Context.BulkSaveChanges();
+    }
+
+    public Task SaveChangesAsync()
+    {
+        return Context.BulkSaveChangesAsync();
     }
 }

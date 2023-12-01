@@ -6,15 +6,9 @@ namespace Viotto.DomainDrivenDesign.Repository;
 public interface IDeletableRepository<TModel, TId>
     where TModel : IEntity<TId>
 {
-    void Delete(TModel model);
-    Task DeleteAsync(TModel model);
+    void Remove(TModel model);
+    void BulkRemove(IEnumerable<TModel> models);
 
-    void DeleteById(TId id);
-    Task DeleteByIdAsync(TId id);
-
-    void DeleteRange(IEnumerable<TModel> models);
-    Task DeleteRangeAsync(IEnumerable<TModel> models);
-
-    void DeleteRangeById(IEnumerable<TId> ids);
-    Task DeleteRangeByIdAsync(IEnumerable<TId> ids);
+    void RemoveById(TId id);
+    void BulkRemoveById(IEnumerable<TId> ids);
 }

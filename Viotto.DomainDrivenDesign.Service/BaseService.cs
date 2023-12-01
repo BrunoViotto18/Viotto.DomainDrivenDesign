@@ -10,7 +10,7 @@ public abstract partial class BaseService<TRepository, TModel, TId> : IService<T
     where TRepository : IRepository<TModel, TId>
     where TModel : IEntity<TId>
 {
-    public TRepository Repository { get; init; }
+    protected TRepository Repository { get; init; }
 
 
     public BaseService(TRepository repository)
@@ -20,8 +20,12 @@ public abstract partial class BaseService<TRepository, TModel, TId> : IService<T
 
 
     public IDbContextTransaction BeginTransaction()
-        => Repository.BeginTransaction();
+    {
+        return Repository.BeginTransaction();
+    }
 
-    public async Task<IDbContextTransaction> BeginTransactionAsync()
-        => await Repository.BeginTransactionAsync();
+    public Task<IDbContextTransaction> BeginTransactionAsync()
+    {
+        return Repository.BeginTransactionAsync();
+    }
 }

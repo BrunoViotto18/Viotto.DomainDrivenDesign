@@ -5,101 +5,30 @@ using Viotto.DomainDrivenDesign.Model;
 namespace Viotto.DomainDrivenDesign.Repository;
 
 
-public abstract partial class BaseRepository<TContext, TModel, TId>
-    where TContext : DbContext
-    where TModel : class, IEntity<TId>
+public abstract partial class BaseRepository<TModel, TId> : IDeletableRepository<TModel, TId>
+    where TModel : class, IEntity<TId>, new()
 {
-    protected virtual Task<bool> BaseDelete(TModel model)
+    public void Remove(TModel model)
     {
-        return Task.FromResult(true);
-    }
-
-    protected virtual async Task<bool> BaseDeleteRange(IEnumerable<TModel> models)
-    {
-        foreach (var model in models)
-        {
-            if (!await BaseDelete(model))
-                return false;
-        }
-
-        return true;
-    }
-
-
-    //! Delete
-
-    public virtual void Delete(TModel model)
-    {
-        DeleteAsync(model).GetAwaiter().GetResult();
-    }
-
-    public virtual async Task DeleteAsync(TModel model)
-    {
-        if (!await BaseDelete(model))
-            return;
-
-        if (!GetAllNoTracking().Any(x => x.Id.Equals(model.Id)))
-        {
-            throw new InvalidOperationException();
-        }
-
         Context.Remove(model);
-        await Context.SaveChangesAsync();
     }
 
-    //! DeleteById
-
-    public virtual void DeleteById(TId id)
+    public void BulkRemove(IEnumerable<TModel> models)
     {
-        DeleteByIdAsync(id).GetAwaiter().GetResult();
-    }
-
-    public virtual async Task DeleteByIdAsync(TId id)
-    {
-        var model = await GetByIdNoTrackingAsync(id);
-
-        await DeleteAsync(model);
-    }
-
-    //! DeleteRange
-
-    public virtual void DeleteRange(IEnumerable<TModel> models)
-    {
-        DeleteRangeAsync(models).GetAwaiter().GetResult();
-    }
-
-    public virtual async Task DeleteRangeAsync(IEnumerable<TModel> models)
-    {
-        if (!await BaseDeleteRange(models))
-            return;
-
-        var ids = models.Select(x => x.Id);
-
-        if (GetAllNoTracking().Where(x => ids.Contains(x.Id)).Count() != ids.Count())
-        {
-            throw new InvalidOperationException();
-        }
-
         Context.RemoveRange(models);
-        await Context.SaveChangesAsync();
     }
 
-    //! DeleteRangeById
-
-    public virtual void DeleteRangeById(IEnumerable<TId> ids)
+    public void RemoveById(TId id)
     {
-        DeleteRangeByIdAsync(ids).GetAwaiter().GetResult();
+        var model = new TModel { Id = id };
+
+        Remove(model);
     }
 
-    public virtual async Task DeleteRangeByIdAsync(IEnumerable<TId> ids)
+    public void BulkRemoveById(IEnumerable<TId> ids)
     {
-        var models = GetRangeByIdNoTracking(ids);
+        var models = ids.Select(id => new TModel { Id = id });
 
-        if (GetAllNoTracking().Where(x => ids.Contains(x.Id)).Count() != ids.Count())
-        {
-            throw new InvalidOperationException();
-        }
-
-        await DeleteRangeAsync(models);
+        BulkRemove(models);
     }
 }
