@@ -1,6 +1,4 @@
-﻿using OneOf;
-
-namespace Viotto.DomainDrivenDesign.Repository.Middlewares;
+﻿namespace Viotto.DomainDrivenDesign.Repository.Middlewares;
 
 
 public class MiddlewareIterator<TInput, TOutput> : IMiddlewareIterator<TInput, TOutput>

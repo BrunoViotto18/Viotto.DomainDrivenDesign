@@ -1,11 +1,6 @@
 ﻿using System.Linq.Expressions;
-using OneOf;
 
 namespace Viotto.DomainDrivenDesign.Repository.Options;
-
-using Middlewares;
-
-
 public interface IRepositoryBuilder<TModel>
 {
     IRepositoryOptions<TModel> Build();

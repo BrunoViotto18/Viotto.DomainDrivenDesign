@@ -1,5 +1,5 @@
-﻿using System.Linq.Expressions;
-using OneOf;
+﻿using OneOf;
+using System.Linq.Expressions;
 
 namespace Viotto.DomainDrivenDesign.Repository.Middlewares;
 

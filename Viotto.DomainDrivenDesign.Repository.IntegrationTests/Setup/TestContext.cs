@@ -41,7 +41,7 @@ internal class TestContext : DbContext
             model.Property(x => x.BirthDate)
                 .HasColumnName("BirthDate")
                 .IsRequired();
-            
+
             model.Property(x => x.LuckyNumber)
                 .HasColumnName("LuckyNumber")
                 .IsRequired();
