@@ -16,23 +16,5 @@
 	<ItemGroup>
 		<ProjectReference Include="..\Viotto.DomainDrivenDesign.Model\Viotto.DomainDrivenDesign.Model.csproj" />
 	</ItemGroup>
-
-	<ItemGroup>
-		<Compile Update="BaseRepository.Queryable.cs">
-			<DependentUpon>BaseRepository.cs</DependentUpon>
-		</Compile>
-		
-		<Compile Update="BaseRepository.Creatable.cs">
-			<DependentUpon>BaseRepository.cs</DependentUpon>
-		</Compile>
-		
-		<Compile Update="BaseRepository.Updatable.cs">
-			<DependentUpon>BaseRepository.cs</DependentUpon>
-		</Compile>
-		
-		<Compile Update="BaseRepository.Deletable.cs">
-			<DependentUpon>BaseRepository.cs</DependentUpon>
-		</Compile>
-	</ItemGroup>
 	
 </Project>
