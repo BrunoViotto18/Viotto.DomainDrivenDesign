@@ -2,7 +2,7 @@
 
 namespace Viotto.DomainDrivenDesign.Repository.IntegrationTests;
 
-internal class TestRepository : BaseRepository<TestModel, Guid>
+internal class TestRepository : Repository<TestModel, Guid>
 {
     public TestRepository(DbContext context) : base(context)
     {
