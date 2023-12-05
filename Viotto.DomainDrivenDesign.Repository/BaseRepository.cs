@@ -6,98 +6,103 @@ using Viotto.DomainDrivenDesign.Model;
 
 namespace Viotto.DomainDrivenDesign.Repository;
 
-
-public abstract class BaseRepository<TModel, TId> : IRepository<TModel, TId>
+// TODO (Bruno Viotto):
+// ! Change class visibility to internal !
+internal sealed class BaseRepository<TModel, TId> : IRepository<TModel, TId>
     where TModel : class, IEntity<TId>, new()
 {
-    protected DbContext Context { get; init; }
+    private readonly DbContext _context;
 
     public BaseRepository(DbContext context)
     {
-        Context = context;
+        _context = context;
     }
 
     public IDbContextTransaction BeginTransaction()
     {
-        return Context.Database.BeginTransaction();
+        return _context.Database.BeginTransaction();
     }
 
     public Task<IDbContextTransaction> BeginTransactionAsync()
     {
-        return Context.Database.BeginTransactionAsync();
+        return _context.Database.BeginTransactionAsync();
     }
 
     public void SaveChanges()
     {
-        Context.BulkSaveChanges();
+        _context.BulkSaveChanges();
     }
 
     public Task SaveChangesAsync()
     {
-        return Context.BulkSaveChangesAsync();
+        return _context.BulkSaveChangesAsync();
     }
 
     public IQueryable<TModel> GetAll()
     {
-        return Context.Set<TModel>();
+        return _context.Set<TModel>();
     }
 
     public IQueryable<TModel> GetAllNoTracking()
     {
-        return GetAll().AsNoTracking();
+        return _context.Set<TModel>()
+            .AsNoTracking();
     }
 
     public IQueryable<TModel> GetById(TId id)
     {
-        return GetAll().Where(x => x.Id.Equals(id));
+        return _context.Set<TModel>()
+            .Where(x => x.Id.Equals(id));
     }
 
     public IQueryable<TModel> GetByIdNoTracking(TId id)
     {
-        return GetAllNoTracking().Where(x => x.Id.Equals(id));
+        return _context.Set<TModel>()
+            .AsNoTracking()
+            .Where(x => x.Id.Equals(id));
     }
 
     public void Insert(TModel model)
     {
-        Context.Add(model);
+        _context.Add(model);
     }
 
     public void BulkInsert(IEnumerable<TModel> models)
     {
-        Context.AddRange(models);
+        _context.AddRange(models);
     }
 
     public void Update(TModel model)
     {
-        Context.Update(model);
+        _context.Update(model);
     }
 
     public void BulkUpdate(IEnumerable<TModel> models)
     {
-        Context.UpdateRange(models);
+        _context.UpdateRange(models);
     }
 
     public void Remove(TModel model)
     {
-        Context.Remove(model);
+        _context.Remove(model);
     }
 
     public void BulkRemove(IEnumerable<TModel> models)
     {
-        Context.RemoveRange(models);
+        _context.RemoveRange(models);
     }
 
     public void RemoveById(TId id)
     {
         var model = new TModel { Id = id };
 
-        Remove(model);
+        _context.Remove(model);
     }
 
     public void BulkRemoveById(IEnumerable<TId> ids)
     {
         var models = ids.Select(id => new TModel { Id = id });
 
-        BulkRemove(models);
+        _context.RemoveRange(models);
     }
 }
